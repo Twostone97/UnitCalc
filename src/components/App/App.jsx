@@ -21,7 +21,8 @@ const units = {
 const App = () => {
   const [input, setInput] = useState("");
   const [results, setResults] = useState([]);
-  const regexI = /(\d*)(\w*)/i;
+
+  const regexI = /(\d+)\ ?([a-z]+)/i;
 
   useEffect(() => {
     if (isNull(input.match(regexI))) {
@@ -39,7 +40,6 @@ const App = () => {
     let result = input.match(regexI);
     let number = result[1];
     let unit = result[2];
-
     if (Object.keys(units.weight).includes(unit)) {
       setResults([
         `${(number / units.weight.g) * units.weight[unit]} g`,
@@ -67,7 +67,6 @@ const App = () => {
       </div>
     );
   });
-
   return (
     <>
       <input
